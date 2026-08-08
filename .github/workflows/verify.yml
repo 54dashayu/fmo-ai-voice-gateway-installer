@@ -1,0 +1,26 @@
+name: Verify public installer
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shell syntax
+        run: sh -n install.sh
+      - name: Verify latest public release anonymously
+        shell: bash
+        run: |
+          unset GH_TOKEN GITHUB_TOKEN
+          release_json=$(curl -fsSL https://api.github.com/repos/54dashayu/fmo-ai-voice-gateway-installer/releases/latest)
+          tag=$(sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' <<<"$release_json" | head -n 1)
+          version=${tag#v}
+          base=https://github.com/54dashayu/fmo-ai-voice-gateway-installer/releases/download/$tag
+          curl -fL -o "fmo-ai-voice-gateway-$version.tar.gz" "$base/fmo-ai-voice-gateway-$version.tar.gz"
+          curl -fL -o "fmo-ai-voice-gateway-$version.tar.gz.sha256" "$base/fmo-ai-voice-gateway-$version.tar.gz.sha256"
+          sha256sum -c "fmo-ai-voice-gateway-$version.tar.gz.sha256"
