@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-REPOSITORY="54dashayu/fmo-ai-voice-gateway-installer"
+REPOSITORY="54dashayu/fmo-ai-voice-gateway"
 WORK_DIR=$(mktemp -d "${TMPDIR:-/tmp}/fmo-ai-install.XXXXXX")
 trap 'rm -rf "$WORK_DIR"' EXIT HUP INT TERM
 

@@ -1,6 +1,6 @@
 # FMO AI Voice Gateway 公开安装入口
 
-这是FMO AI Voice Gateway的公开、免登录安装仓库。它只用于分发安装引导脚本、经过校验的Release安装包和使用说明。
+这是FMO AI Voice Gateway的公开、免登录安装入口。引导脚本会直接获取主仓库的最新正式 Release 和 SHA-256 校验文件，避免安装器仓库与产品版本不同步。
 
 ## 🚀 无需登录，一键下载安装
 
@@ -34,11 +34,13 @@ sh /tmp/fmo-ai-install.sh
 |---|---|
 | Ubuntu 22.04 / 24.04 | x86_64、ARM64 |
 | Debian 12 | x86_64、ARM64 |
-| Rocky Linux / AlmaLinux 9 | x86_64、ARM64 |
+| Rocky Linux / AlmaLinux 9 | x86_64、ARM64（可能需要管理员先配置可提供 ffmpeg 的合规软件源） |
+
+Ubuntu 22.04 x86_64 会执行真实 CI 安装、升级和回退验证；其余发行版和 ARM64 是声明兼容范围，不代表本版本已经逐一完成真机验收。
 
 ## 手工下载安装
 
-也可以从本仓库的 [Releases](https://github.com/54dashayu/fmo-ai-voice-gateway-installer/releases) 页面下载压缩包和对应的 `.sha256` 文件，校验后执行包内的 `install.sh`。
+也可以从主仓库的 [Releases](https://github.com/54dashayu/fmo-ai-voice-gateway/releases) 页面下载压缩包和对应的 `.sha256` 文件，校验后执行包内的 `install.sh`。
 
 ## 说明
 
